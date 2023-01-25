@@ -19,3 +19,13 @@ services:
       POSTGRES_USER: order
       POSTGRES_PASSWORD: password
       POSTGRES_DB: order
+  inventory-db:
+    image: postgres:13.3-alpine
+    container_name: inventory-db
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: inventory
+
