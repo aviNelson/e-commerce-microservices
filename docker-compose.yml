@@ -28,4 +28,12 @@ services:
       POSTGRES_USER: inventory
       POSTGRES_PASSWORD: password
       POSTGRES_DB: inventory
+  key-clock:
+    image: jboss/keycloak
+    container_name: key-clock
+    ports:
+      - "8070:8080"
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
 
