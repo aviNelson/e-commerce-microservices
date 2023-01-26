@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  product-db:
+    image: postgres:13.3-alpine
+    container_name: product-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: product
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: product
+  order-db:
+    image: postgres:13.3-alpine
+    container_name: order-db
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: order
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: order
+  inventory-db:
+    image: postgres:13.3-alpine
+    container_name: inventory-db
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_USER: inventory
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: inventory
+

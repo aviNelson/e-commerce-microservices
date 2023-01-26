@@ -1,4 +1,4 @@
-package com.example.orderservice;
+package com.example.inventoryservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,10 +12,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ConfigurationPropertiesScan
 @EnableEurekaClient
 @EnableFeignClients
-public class OrderServiceApplication {
+public class InventoryServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderServiceApplication.class, args);
+        SpringApplication.run(InventoryServiceApplication.class, args);
     }
 
 }

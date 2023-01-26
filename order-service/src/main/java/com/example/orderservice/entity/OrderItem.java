@@ -1,11 +1,9 @@
-package com.example.productservice.entity;
+package com.example.orderservice.entity;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
@@ -13,16 +11,20 @@ import java.util.Objects;
 @Builder
 @Getter
 @Setter
-@Table(name = "product")
-public class Product {
-
+@Table(name = "orders_item")
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    private String description;
+    @Column(name = "sku_code")
+    private String skuCode;
+
+    private Integer quantity;
 
     private BigDecimal price;
 
