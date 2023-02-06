@@ -19,6 +19,6 @@ public class OrderController {
 
     @PostMapping
     public ResponseOrder create(@RequestBody RequestOrder requestOrder){
-        return orderService.create(requestOrder);
+        return orderService.placeOrder(requestOrder);
     }
 }

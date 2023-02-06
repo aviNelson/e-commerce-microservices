@@ -12,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class InventoryRequest implements Serializable {
+    private Integer id;
     private String skuCode;
     private Integer quantity;
 }

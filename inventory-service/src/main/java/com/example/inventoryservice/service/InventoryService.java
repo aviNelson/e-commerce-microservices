@@ -10,4 +10,6 @@ public interface InventoryService {
     public InventoryResponse create(InventoryRequest inventoryRequest);
 
     public List<InventoryResponse> getAll(List<String> skuCodes);
+
+    List<InventoryResponse> updateQuantitys(List<InventoryRequest> list);
 }

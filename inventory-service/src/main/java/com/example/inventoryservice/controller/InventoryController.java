@@ -28,4 +28,9 @@ public class InventoryController {
     public InventoryResponse create(@RequestBody InventoryRequest inventoryRequest){
         return inventoryService.create(inventoryRequest);
     }
+
+    @PostMapping("/update")
+    public List<InventoryResponse> updateQuantity(@RequestBody List<InventoryRequest> list){
+        return inventoryService.updateQuantitys(list);
+    }
 }

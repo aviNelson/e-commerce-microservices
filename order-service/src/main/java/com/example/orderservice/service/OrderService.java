@@ -5,5 +5,5 @@ import com.example.orderservice.dto.ResponseOrder;
 
 public interface OrderService {
 
-    public ResponseOrder create(RequestOrder requestOrder);
+    public ResponseOrder placeOrder(RequestOrder requestOrder);
 }

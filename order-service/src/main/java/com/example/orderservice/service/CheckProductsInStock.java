@@ -1,29 +1,38 @@
 package com.example.orderservice.service;
 
-import com.example.orderservice.dto.InventoryResponse;
-import com.example.orderservice.feignclient.FeignInventoryService;
+import com.example.orderservice.dto.InventoryDto;
+import com.example.orderservice.entity.Order;
+import com.example.orderservice.entity.OrderItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Component
 public class CheckProductsInStock {
 
-    private final FeignInventoryService feignInventoryService;
+    public boolean allProductsInStock(List<InventoryDto> inventoryResponseList, Order order) {
+        List<String> skuCodes = order.getOrderItems().stream().map(OrderItem::getSkuCode).collect(Collectors.toList());
+        List<String> list = inventoryResponseList.stream().map(InventoryDto::getSkuCode).collect(Collectors.toList());
+        boolean isAllMatch = inventoryResponseList.stream().allMatch(inventoryDto -> inventoryDto.getQuantity() > 0);
+        boolean sufficientQuantity = isSufficientQuantity(inventoryResponseList, order.getOrderItems());
 
-    public boolean allProductsInStock(List<InventoryResponse> inventoryResponses, List<String> ckuCodes){
-        List<String> list = inventoryResponses.stream().map(InventoryResponse::getSkuCode).collect(Collectors.toList());
-        boolean isAllMatch = inventoryResponses.stream().allMatch(inventoryResponse -> inventoryResponse.getQuantity() > 0);
-        return list.containsAll(ckuCodes) && isAllMatch;
+        return list.containsAll(skuCodes) && isAllMatch && sufficientQuantity;
     }
 
+    public boolean isSufficientQuantity(List<InventoryDto> inventoryDtoList, List<OrderItem> orderItems) {
 
-
-
+        for (InventoryDto inventoryDto : inventoryDtoList) {
+            for (OrderItem orderItem : orderItems) {
+                if (!(inventoryDto.getQuantity() >= orderItem.getQuantity())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
 
 }

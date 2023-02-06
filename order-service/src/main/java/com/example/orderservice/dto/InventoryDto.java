@@ -11,7 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class InventoryResponse implements Serializable {
+public class InventoryDto implements Serializable {
     private Integer id;
     private String skuCode;
     private Integer quantity;

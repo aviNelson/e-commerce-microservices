@@ -3,7 +3,6 @@ package com.example.inventoryservice.service;
 
 import com.example.inventoryservice.dto.InventoryRequest;
 import com.example.inventoryservice.dto.InventoryResponse;
-import com.example.inventoryservice.entity.Inventory;
 import com.example.inventoryservice.mapper.InventoryMapper;
 import com.example.inventoryservice.repository.InventoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +36,15 @@ public class InventoryServiceImpl implements InventoryService {
                 .collect(Collectors.toList());
 
 
+    }
+
+    public List<InventoryResponse> updateQuantitys(List<InventoryRequest> list) {
+        return list
+                .stream()
+                .map(InventoryMapper.INSTANCE::dtoToEntity)
+                .map(inventoryRepository::save)
+                .map(InventoryMapper.INSTANCE::entityToDto)
+                .collect(Collectors.toList());
     }
 
 
