@@ -1,16 +1,17 @@
-Небольшое приложение для оформления заказов.
+Небольшое e-commerce приложение для оформления заказов.
 
 Мотивация проекта: понять как между собой взаимодействуют микросервисы и реализовать это. 
 
+Стек: Java 11, Spring Boot, Spring MVC, Spring Data JPA, Spring Cloud, Apache Kafka, Docker compose, SQL(Postgresql), Liquibase, Swagger, Gradle.
+
 Реализованы : order-service, inventory-service, product-service.
-Пользователь может оформлять заказы через order-service. Взаимодействует пользователь с order-service через api-gateway. 
+Пользователь может оформлять заказы через order-service. 
 
-Взаимодействие микросервисов между собой происходит с помощью eureka-server и feign-client.
+Так же реализован discovery-server с помощью eureka-client.
+Взаимодействие микросервисов между собой происходит с помощью feign-client.
 Настроена удалённая конфигурация микросервисов с помощью Spring cloud config, реализован config-server. 
-Реализована регистрация и авторизация через auth-server и api-gateway с помощью jwt. 
+Взаимодействие клиента с сервисами происхдит через api-gateway.
 
-Стек: Java 11, Spring Boot, Spring Security, 
-Spring MVC, Spring Data JPA, Spring Cloud, Apache Kafka, Docker compose, SQL(Postgresql), Liquibase, Swagger, Gradle.
 
-В docker compose файле уже прописаны нужные docker image ,ничего дополнительно билдить не нужно, так как приложение собрано в docker image через Dockerfile.
- Для запуска проекта требуется из корневой папки проекта запустить команду docker compose -up, будут загружены docker image из docker hub.
+В docker compose файле уже прописаны нужные docker image ,ничего дополнительно билдить не нужно, так как микросервисы уже собраны в docker image через jib.
+Для запуска проекта требуется из корневой папки проекта запустить команду docker compose -up, из docker hub будут загружены docker image.
