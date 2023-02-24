@@ -1,0 +1,10 @@
+#todo:config server
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:29092
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+

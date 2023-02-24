@@ -1,5 +1,6 @@
 package com.example.orderservice.service;
 
+import com.example.orderservice.event.KafkaProducer;
 import com.example.orderservice.event.OrderPlacedEvent;
 import com.example.orderservice.feignclient.FeignInventoryService;
 import com.example.orderservice.dto.InventoryDto;
@@ -28,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final CheckProductsInStock checkProductsInStock;
     private final ReduceQuantity reduceQuantity;
-    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
+    private final KafkaTemplate<String,OrderPlacedEvent> kafkaTemplate;
 
     @Override
     public ResponseOrder placeOrder(RequestOrder requestOrder) {

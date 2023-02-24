@@ -2,11 +2,18 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.8'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.google.cloud.tools.jib' version '3.3.1'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
@@ -14,6 +21,19 @@ repositories {
 
 ext {
     set('springCloudVersion', "2021.0.5")
+}
+
+jib {
+    from {
+        image = "bellsoft/liberica-openjdk-alpine-musl"
+    }
+    to {
+        image = "registry.hub.docker.com/avinelson/${rootProject.name}:latest"
+        auth {
+            username = System.getProperty('username')
+            password = System.getProperty('password')
+        }
+    }
 }
 
 dependencies {

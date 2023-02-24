@@ -1,6 +1,8 @@
 version: '3.1'
 
 services:
+
+
   product-db:
     image: postgres:13.3-alpine
     container_name: product-db
@@ -10,6 +12,7 @@ services:
       POSTGRES_USER: product
       POSTGRES_PASSWORD: password
       POSTGRES_DB: product
+
   order-db:
     image: postgres:13.3-alpine
     container_name: order-db
@@ -19,6 +22,7 @@ services:
       POSTGRES_USER: order
       POSTGRES_PASSWORD: password
       POSTGRES_DB: order
+
   inventory-db:
     image: postgres:13.3-alpine
     container_name: inventory-db
@@ -28,12 +32,14 @@ services:
       POSTGRES_USER: inventory
       POSTGRES_PASSWORD: password
       POSTGRES_DB: inventory
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka-broker
@@ -42,11 +48,89 @@ services:
     depends_on:
       - zookeeper
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
+  config-server:
+    image: avinelson/config-server:latest
+    container_name: config-server
+    ports:
+      - "8085:8085"
+
+  discovery-server:
+    image: avinelson/discovery-server
+    container_name: discovery-server:latest
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+
+  api-gateway:
+    image: avinelson/api-gateway:latest
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - discovery-server
+      - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  order-service:
+    image: avinelson/order-service:latest
+    container_name: order-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-server
+      - api-gateway
+      - order-db
+      - kafka
+      - inventory-service
+      - config-server
+
+  inventory-service:
+    image: avinelson/inventory-service:latest
+    container_name: inventory-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - api-gateway
+      - discovery-server
+      - inventory-db
+      - config-server
+
+  product-service:
+    image: avinelson/product-service:latest
+    container_name: product-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - api-gateway
+      - discovery-server
+      - product-db
+      - config-server
+
+  notification-service:
+    image: avinelson/notification-service:latest
+    container_name: notification-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - api-gateway
+      - discovery-server
+      - kafka
+      - config-server
 

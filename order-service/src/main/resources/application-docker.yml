@@ -1,0 +1,12 @@
+#todo:config server
+spring:
+  datasource:
+    url: jdbc:postgresql://order-db:5434/order
+  kafka:
+    producer:
+      bootstrap-servers: kafka:29092
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+
