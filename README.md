@@ -32,9 +32,6 @@
 * discovery-server (netflix-eureka)
 * api-gateway
 
-Клиент отправляет запрос на оформление заказа в order-service через api-gateway, order-service проверяет количество товаров через inventory-service. 
-Если заказ оформлен, order-service отправляет сообщение в notification-service через Kafka.
-
 ## Стек
 
 * Java 11
