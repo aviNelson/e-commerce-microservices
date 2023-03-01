@@ -3,7 +3,7 @@
   <h3 align="left">Microservices-project</h3>
 
   <p align="left">
-    Небольшое e-commerce приложение для оформления заказов.
+    Небольшое e-commerce приложение для оформления заказов
     <br/>
     <br/>
   </p>
