@@ -1,17 +1,72 @@
+<br/>
+<p align="center">
+  <h3 align="left">Microservices-project</h3>
+
+  <p align="left">
+    Небольшое e-commerce приложение для оформления заказов.
+    <br/>
+    <br/>
+  </p>
+</p>
+
+![Contributors](https://img.shields.io/github/contributors/AviNelson/microservices-project?color=dark-green) ![Issues](https://img.shields.io/github/issues/AviNelson/microservices-project) 
+
+## Оглавление
+
+* [О проекте](#о-проекте)
+* [Стек](#стек)
+* [Установка](#установка)
+* [Пример использования](#пример-использования)
+
+## О проекте
+
 Небольшое e-commerce приложение для оформления заказов.
+Проект написан с использование микросервисного подхода.
 
-Мотивация проекта: понять как между собой взаимодействуют микросервисы и реализовать это. 
+Реализованы:
+* order-service
+* inventory-service
+* product-service
+* notification-service
+* config-server
+* discovery-server (netflix-eureka)
+* api-gateway
 
-Стек: Java 11, Spring Boot, Spring MVC, Spring Data JPA, Spring Cloud, Apache Kafka, Docker compose, SQL(Postgresql), Liquibase, Swagger, Gradle.
+## Стек
 
-Реализованы : order-service, inventory-service, product-service.
-Пользователь может оформлять заказы через order-service. 
+* Java 11
+* Spring Boot
+* Spring Cloud (Eureka, Feign-client, Config Server, API Gateway)
+* Spring Data JPA
+* Spring MVC
+* PostgreSQL
+* SQL
+* Docker compose
+* Jib
+* Apache Kafka
+* Gradle
+* Liquibase
+* Swagger
 
-Так же реализован discovery-server с помощью eureka-client.
-Взаимодействие микросервисов между собой происходит с помощью feign-client.
-Настроена удалённая конфигурация микросервисов с помощью Spring cloud config, реализован config-server. 
-Взаимодействие клиента с сервисами происхдит через api-gateway.
+### Установка
+
+1. Клонировать репозиторий
+
+```sh
+git clone https://github.com/aviNelson/microservices-project.git
+```
+
+2. В корневой папке проекта запустить
+
+```sh
+docker compose up
+```
+
+3. После этого будут скачаны docker-image's с docker-hub и приложение запустится
+
+## Пример использования
+
+Клиент отправляет запрос на оформление заказа в order-service через api-gateway, order-service проверяет количество товаров через inventory-service. 
+Если заказ успешно оформлен, order-service отправляет сообщение в notification-service через Kafka.
 
 
-В docker compose файле уже прописаны нужные docker image ,ничего дополнительно билдить не нужно, так как микросервисы уже собраны в docker image через jib.
-Для запуска проекта требуется из корневой папки проекта запустить команду docker compose -up, из docker hub будут загружены docker image.
