@@ -1,10 +1,8 @@
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: http://discovery-server:8761/eureka
-    fetch-registry: true
-    register-with-eureka: true
-#todo:config server
+spring:
+  profiles:
+    active: docker
+  cloud:
+    config:
+      uri: http://config-server:8071
+
 

@@ -59,7 +59,7 @@ services:
     image: avinelson/config-server:latest
     container_name: config-server
     ports:
-      - "8085:8085"
+      - "8071:8071"
 
   discovery-server:
     image: avinelson/discovery-server
@@ -68,6 +68,8 @@ services:
       - "8761:8761"
     depends_on:
       - config-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
   api-gateway:
     image: avinelson/api-gateway:latest

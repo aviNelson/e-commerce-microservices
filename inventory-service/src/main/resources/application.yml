@@ -1,26 +1,8 @@
-#todo:config server
-server:
-  port: 8082
 spring:
-  application:
-    name: inventory-service
-  datasource:
-    url: jdbc:postgresql://localhost:5435/inventory
-    username: inventory
-    password: password
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    properties.hibernate:
-      show_sql: true
-      format_sql: true
-      hbm2ddl.auto: validate
-    open-in-view: false
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  profiles:
+    active: docker
+  cloud:
+    config:
+      uri: http://localhost:8071
 
 

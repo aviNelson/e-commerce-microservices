@@ -1,7 +1,6 @@
-server:
-  port: 8761
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-#todo:config server
+spring:
+  profiles:
+    active: docker
+  cloud:
+    config:
+      uri: http://config-server:8071

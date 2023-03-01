@@ -1,23 +1,4 @@
-server:
-  port: 8084
 spring:
-  application:
-    name: product-service
-  datasource:
-    url: jdbc:postgresql://localhost:5433/product
-    username: product
-    password: password
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    properties.hibernate:
-      show_sql: true
-      format_sql: true
-      hbm2ddl.auto: validate
-    open-in-view: false
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  cloud:
+    config:
+      uri: http://localhost:8071

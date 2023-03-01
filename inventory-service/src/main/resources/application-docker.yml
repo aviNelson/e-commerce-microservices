@@ -1,12 +1,7 @@
-#todo:config server
 spring:
-  datasource:
-    url: jdbc:postgresql://inventory-db:5435/inventory
-  kafka:
-    producer:
-      bootstrap-servers: kafka:29092
-eureka:
-  client:
-    service-url:
-      defaultZone: http://discovery-server:8761/eureka
+  profiles:
+    active: docker
+  cloud:
+    config:
+      uri: http://config-server:8071
 

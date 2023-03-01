@@ -1,7 +1,4 @@
-server:
-  port: 8761
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-#todo:config server
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8071
