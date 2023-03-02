@@ -12,4 +12,4 @@ spring:
         git:
           uri: https://github.com/aviNelson/config.git
           password:
-          username:
+          username: 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
