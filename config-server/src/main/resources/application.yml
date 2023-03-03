@@ -10,6 +10,8 @@ spring:
     config:
       server:
         git:
+#         your link to github repository with configs
           uri: https://github.com/aviNelson/config.git
           password:
-          username:
+#         your access token to the github repository with configs
+          username: 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
