@@ -15,6 +15,9 @@ import java.util.List;
 @Data
 public class ResponseOrder implements Serializable {
     private Integer id;
+
     private String orderNumber;
+
+    @Builder.Default
     private List<OrderItemDto> orderItems = new ArrayList<>();
 }

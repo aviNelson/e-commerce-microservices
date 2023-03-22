@@ -14,5 +14,7 @@ import java.util.List;
 @Builder
 @Data
 public class RequestOrder implements Serializable {
+
+    @Builder.Default
     private List<OrderItemDto> orderItems = new ArrayList<>();
 }

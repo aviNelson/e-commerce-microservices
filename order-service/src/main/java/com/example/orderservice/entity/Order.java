@@ -22,7 +22,7 @@ public class Order {
     @Column(name = "order_number")
     private String orderNumber;
 
-
+    @Builder.Default
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems=new ArrayList<>();
 
