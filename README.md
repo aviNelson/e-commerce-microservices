@@ -53,16 +53,19 @@
 1. Клонировать репозиторий
 
 ```sh
-git clone https://github.com/aviNelson/microservices-project.git
+git clone https://github.com/aviNelson/e-commerce-microservices.git
 ```
 
-2. В корневой папке проекта запустить
+2. В docker compose.yml у config-server в environment указать uri github'а и username(access token), чтобы config-server читал конфиги из нужного репозитория.
+
+
+3. В корневой папке проекта запустить
 
 ```sh
 docker compose up
 ```
 
-3. После этого будут скачаны docker-image's с docker-hub и приложение запустится
+4. После этого будут скачаны docker-image's с docker-hub и приложение запустится
 
 ## Пример использования
 
